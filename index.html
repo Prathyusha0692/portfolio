@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sai Prathyusha Tellakula — Java Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@0,400;0,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0c0b09;
+  --surface:#131209;
+  --card:#1a1814;
+  --border:#2a2620;
+  --white:#f0ece3;
+  --muted:#7a7060;
+  --faint:#3a3628;
+  --amber:#e8b84b;
+  --rust:#c9622f;
+  --light:#f0ece3;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--white);font-family:'Familjen Grotesk',sans-serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
+#cur2{position:fixed;width:38px;height:38px;border:1px solid rgba(232,184,75,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:200;
+  padding:1.4rem 3.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(12,11,9,.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;color:var(--amber)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
+.nav-links a:hover{color:var(--white)}
+
+/* HERO */
+#hero{
+  min-height:100vh;padding:9rem 3.5rem 5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Space Mono',monospace;font-size:.6rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--amber);border:1px solid rgba(232,184,75,.25);
+  padding:.45rem 1.1rem;background:rgba(232,184,75,.05);
+  margin-bottom:3rem;width:fit-content;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(5rem,12vw,13rem);
+  line-height:.9;letter-spacing:-.01em;
+  margin-bottom:2rem;
+}
+.hero-name .line1{color:var(--white);display:block}
+.hero-name .line2{color:transparent;-webkit-text-stroke:2px var(--white);display:block}
+.hero-name .line3{color:var(--amber);display:block}
+.hero-sub{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:end;margin-top:3rem;
+  padding-top:3rem;border-top:1px solid var(--border);
+}
+.hero-desc{font-size:1rem;line-height:1.8;color:var(--muted);max-width:480px}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:1.5rem}
+.hero-loc{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+.hero-btns{display:flex;gap:1rem}
+.btn{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:.85rem 2rem;text-decoration:none;cursor:none;transition:all .25s;display:inline-block}
+.btn-solid{background:var(--amber);color:var(--bg)}
+.btn-solid:hover{background:#d4a43a}
+.btn-ghost{border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+/* MARQUEE */
+.ticker{overflow:hidden;background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.8rem 0}
+.ticker-inner{display:inline-block;white-space:nowrap;animation:tick 28s linear infinite;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--amber);letter-spacing:.12em}
+.ticker-inner span{color:var(--faint);margin:0 1.2rem}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* SECTION COMMONS */
+.sec{padding:7rem 3.5rem;border-bottom:1px solid var(--border)}
+.sec-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem}
+.sec-label::before{content:'';width:20px;height:1px;background:var(--amber);display:block}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5.5rem);line-height:.95;letter-spacing:-.01em;margin-bottom:3.5rem}
+.sec-title em{font-style:italic;font-family:'Familjen Grotesk',sans-serif;font-size:.45em;color:var(--muted);display:block;margin-bottom:.3rem;font-weight:400}
+
+/* ABOUT */
+#about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:6rem;align-items:start}
+.about-text p{font-size:1rem;line-height:1.9;color:var(--muted);margin-bottom:1.2rem}
+.about-text strong{color:var(--white);font-weight:600}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.tag{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid var(--border);color:var(--muted);transition:all .25s;cursor:none}
+.tag:hover{border-color:var(--amber);color:var(--amber)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
+.stat{background:var(--card);padding:2.2rem 1.8rem;transition:background .25s;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--rust));transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.stat:hover{background:#1f1c14}
+.stat:hover::before{transform:scaleX(1)}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:3.8rem;color:var(--amber);line-height:1;margin-bottom:.3rem}
+.stat-l{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+/* SKILLS */
+#skills{background:var(--bg)}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.skill-card{background:var(--card);padding:2.5rem;transition:background .3s;position:relative;overflow:hidden}
+.skill-card:hover{background:#1f1c14}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0;background:var(--amber);transition:height .3s}
+.skill-card:hover::after{height:2px}
+.skill-icon{font-size:1.8rem;display:block;margin-bottom:1.2rem}
+.skill-name{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--white);margin-bottom:1rem}
+.skill-items{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.skill-items li{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.06em;color:var(--muted);transition:color .2s}
+.skill-card:hover .skill-items li{color:rgba(240,236,227,.6)}
+
+/* EXPERIENCE */
+#experience{background:var(--light)}
+#experience .sec-label{color:var(--rust)}
+#experience .sec-label::before{background:var(--rust)}
+#experience .sec-title{color:var(--bg)}
+#experience .sec-title em{color:#9a9080}
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{
+  display:grid;grid-template-columns:120px 260px 1fr;
+  border-top:1px solid #d8d0c0;
+  transition:background .2s;
+}
+.exp-item:last-child{border-bottom:1px solid #d8d0c0}
+.exp-item:hover{background:rgba(0,0,0,.03)}
+.exp-yr{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.18em;color:#a09080;padding:2.5rem 2rem 2.5rem 0;border-right:1px solid #d8d0c0;display:flex;align-items:flex-start}
+.exp-meta{padding:2.5rem 2.5rem;border-right:1px solid #d8d0c0}
+.exp-role{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--bg);line-height:1.05;letter-spacing:.02em;margin-bottom:.4rem}
+.exp-co{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rust)}
+.exp-body{padding:2.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.exp-bullets li{font-size:.88rem;color:#4a4438;line-height:1.7;padding-left:1.2rem;position:relative}
+.exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--rust);font-size:.7rem}
+.exp-bullets strong{color:var(--bg);font-weight:600}
+.exp-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.3rem}
+.chip{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;background:rgba(0,0,0,.06);color:#8a8070}
+
+/* PROJECTS */
+#projects{background:var(--surface)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border)}
+.proj-card{background:var(--card);padding:3rem 2.5rem;display:flex;flex-direction:column;min-height:400px;position:relative;overflow:hidden;transition:background .3s;cursor:none}
+.proj-card:hover{background:#1f1c14}
+.proj-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(255,255,255,.04);position:absolute;top:1rem;right:1.5rem;line-height:1;transition:color .3s}
+.proj-card:hover .proj-num{color:rgba(232,184,75,.1)}
+.proj-bar{width:28px;height:2px;background:var(--amber);margin-bottom:2rem;transition:width .35s}
+.proj-card:hover .proj-bar{width:56px}
+.proj-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--white);line-height:1.05;letter-spacing:.02em;margin-bottom:1rem}
+.proj-desc{font-size:.85rem;color:var(--muted);line-height:1.75;flex:1;margin-bottom:1.5rem}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.4rem}
+.ps{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border:1px solid var(--border);color:var(--muted);transition:all .2s}
+.proj-card:hover .ps{border-color:rgba(232,184,75,.3);color:rgba(232,184,75,.7)}
+
+/* EDUCATION */
+#education{background:var(--bg)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
+.edu-card{background:var(--card);padding:3.5rem;transition:background .3s}
+.edu-card:hover{background:#1f1c14}
+.edu-icon{font-size:2.5rem;display:block;margin-bottom:1.5rem;filter:grayscale(1);transition:filter .3s}
+.edu-card:hover .edu-icon{filter:none}
+.edu-deg{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);line-height:1.05;letter-spacing:.02em;margin-bottom:.4rem}
+.edu-school{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.5rem}
+.edu-info{font-size:.85rem;color:var(--muted);line-height:1.6}
+.cert-label{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:1.2rem;margin-top:2.5rem;display:block}
+.cert-list{list-style:none;display:flex;flex-direction:column;gap:0}
+.cert-list li{font-size:.85rem;color:var(--muted);padding:1rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.8rem;line-height:1.5;transition:color .25s}
+.cert-list li:hover{color:var(--white)}
+.cert-list li::before{content:'✦';color:var(--amber);font-size:.6rem;flex-shrink:0}
+
+/* CONTACT */
+#contact{
+  background:var(--surface);
+  padding:9rem 3.5rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.ct-bg{position:absolute;bottom:-4rem;left:50%;transform:translateX(-50%);font-family:'Bebas Neue',sans-serif;font-size:20vw;color:rgba(255,255,255,.025);white-space:nowrap;pointer-events:none;user-select:none;line-height:1}
+.ct-label{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:.7rem}
+.ct-label::before,.ct-label::after{content:'';width:20px;height:1px;background:var(--amber);display:block}
+.ct-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,10rem);line-height:.9;letter-spacing:-.01em;color:var(--white);margin-bottom:1rem;position:relative;z-index:1}
+.ct-title span{color:transparent;-webkit-text-stroke:2px var(--amber)}
+.ct-sub{font-size:.95rem;color:var(--muted);max-width:420px;margin:0 auto 3rem;line-height:1.8;position:relative;z-index:1}
+.ct-email{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3vw,2.8rem);color:var(--amber);text-decoration:none;letter-spacing:.03em;border-bottom:2px solid transparent;padding-bottom:3px;transition:border-color .3s;display:inline-block;margin-bottom:3rem;position:relative;z-index:1;cursor:none}
+.ct-email:hover{border-color:var(--amber)}
+.ct-links{display:flex;gap:3rem;justify-content:center;position:relative;z-index:1}
+.ct-link{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s;cursor:none}
+.ct-link:hover{color:var(--white)}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:1.6rem 3.5rem;display:flex;justify-content:space-between;align-items:center}
+footer span{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(30px);transition:opacity .85s ease,transform .85s ease}
+.r.v{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1.2rem 2rem}.nav-links{display:none}
+  .sec{padding:5rem 2rem}
+  #hero{padding:7rem 2rem 4rem}
+  .hero-sub,.about-grid,.edu-grid{grid-template-columns:1fr;gap:2.5rem}
+  .skills-grid,.proj-grid{grid-template-columns:1fr 1fr}
+  .exp-item{display:block}
+  .exp-yr,.exp-meta,.exp-body{border:none;padding:1.2rem 2rem}
+  .exp-yr{padding-bottom:0}
+  footer{flex-direction:column;gap:.5rem;text-align:center}
+}
+@media(max-width:600px){
+  .skills-grid,.proj-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">SPT</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge"><div class="badge-dot"></div> Available for Opportunities</div>
+  <h1 class="hero-name">
+    <span class="line1">SAI</span>
+    <span class="line2">PRATHYUSHA</span>
+    <span class="line3">TELLAKULA</span>
+  </h1>
+  <div class="hero-sub">
+    <p class="hero-desc">Enterprise Java developer building scalable, battle-tested systems. 3+ years turning complex business requirements into clean architecture that survives the real world.</p>
+    <div class="hero-right">
+      <span class="hero-loc">📍 Open to Relocate · Anywhere in the US</span>
+      <div class="hero-btns">
+        <a href="#experience" class="btn btn-solid">View Work</a>
+        <a href="#contact" class="btn btn-ghost">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    JAVA DEVELOPER <span>✦</span> J2EE <span>✦</span> ENTERPRISE SYSTEMS <span>✦</span> KUBERNETES <span>✦</span> ORACLE DBA <span>✦</span> IBM WEBSPHERE <span>✦</span> MVC ARCHITECTURE <span>✦</span> REST APIs <span>✦</span> BATCH PROCESSING <span>✦</span> DOCKER <span>✦</span> PYTHON <span>✦</span> AWS <span>✦</span> POWER BI <span>✦</span> CHICAGO IL <span>✦</span>&nbsp;JAVA DEVELOPER <span>✦</span> J2EE <span>✦</span> ENTERPRISE SYSTEMS <span>✦</span> KUBERNETES <span>✦</span> ORACLE DBA <span>✦</span> IBM WEBSPHERE <span>✦</span> MVC ARCHITECTURE <span>✦</span> REST APIs <span>✦</span> BATCH PROCESSING <span>✦</span> DOCKER <span>✦</span> PYTHON <span>✦</span> AWS <span>✦</span> POWER BI <span>✦</span> CHICAGO IL <span>✦</span>&nbsp;
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <p class="sec-label r">About Me</p>
+  <h2 class="sec-title r">BUILDING THINGS<br/>THAT <em>Last</em>LAST</h2>
+  <div class="about-grid">
+    <div class="about-text r">
+      <p>Enterprise Java developer with <strong>3+ years of professional experience</strong> across high-stakes production environments. I specialize in <strong>Java/J2EE web application development</strong>, MVC architecture, batch processing, and REST web services.</p>
+      <p>At Cognizant, I owned performance tuning that cut critical batch jobs by <strong>40%</strong>, doubled throughput without breaking SLAs, and drove production incident reduction by <strong>20–30%</strong> through systematic root cause analysis on IBM WebSphere and Linux.</p>
+      <p>Currently completing my <strong>Master's in Information Technology at IIT Chicago</strong> (GPA: 3.67/4.0), while contributing to Python research pipelines that eliminated 30–40% of manual data preparation effort.</p>
+      <div class="about-tags">
+        <span class="tag">Java / J2EE</span>
+        <span class="tag">Oracle DB</span>
+        <span class="tag">IBM WebSphere</span>
+        <span class="tag">MVC</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Python</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Linux</span>
+        <span class="tag">Batch Processing</span>
+      </div>
+    </div>
+    <div class="stats-grid r">
+      <div class="stat"><div class="stat-n">3+</div><div class="stat-l">Years Enterprise Java</div></div>
+      <div class="stat"><div class="stat-n">40%</div><div class="stat-l">Faster Batch Jobs</div></div>
+      <div class="stat"><div class="stat-n">2×</div><div class="stat-l">Throughput Boost</div></div>
+      <div class="stat"><div class="stat-n">30%</div><div class="stat-l">Incident Reduction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sec">
+  <p class="sec-label r">Technical Stack</p>
+  <h2 class="sec-title r">TECHNICAL<br/><em>Precision-built for production</em>ARSENAL</h2>
+  <div class="skills-grid r">
+    <div class="skill-card">
+      <span class="skill-icon">⚙️</span>
+      <div class="skill-name">Languages</div>
+      <ul class="skill-items">
+        <li>Java 6 / 8</li>
+        <li>SQL &amp; PL/SQL</li>
+        <li>Python</li>
+        <li>JavaScript</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🏗️</span>
+      <div class="skill-name">J2EE &amp; Web</div>
+      <ul class="skill-items">
+        <li>JSP &amp; Servlets</li>
+        <li>JDBC</li>
+        <li>Session EJB</li>
+        <li>REST / SOAP Web Services</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🧩</span>
+      <div class="skill-name">Architecture</div>
+      <ul class="skill-items">
+        <li>MVC Architecture</li>
+        <li>DAO Pattern</li>
+        <li>Singleton &amp; Factory</li>
+        <li>OOP Principles</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">🗄️</span>
+      <div class="skill-name">Databases</div>
+      <ul class="skill-items">
+        <li>Oracle</li>
+        <li>DB2</li>
+        <li>PostgreSQL</li>
+        <li>Query &amp; Proc Tuning</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">☁️</span>
+      <div class="skill-name">Cloud &amp; DevOps</div>
+      <ul class="skill-items">
+        <li>Kubernetes / AKS</li>
+        <li>Docker</li>
+        <li>GitHub Actions</li>
+        <li>IBM WebSphere 8.0</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <span class="skill-icon">📊</span>
+      <div class="skill-name">Data &amp; ML</div>
+      <ul class="skill-items">
+        <li>Pandas &amp; NumPy</li>
+        <li>Scikit-learn</li>
+        <li>Matplotlib</li>
+        <li>Microsoft Power BI</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="sec" style="background:var(--light)">
+  <p class="sec-label r">Career</p>
+  <h2 class="sec-title r" style="color:var(--bg)">WHERE IMPACT<br/><em>3+ years of real production work</em>WAS MADE</h2>
+  <div class="exp-list r">
+
+    <div class="exp-item">
+      <div class="exp-yr">2025</div>
+      <div class="exp-meta">
+        <div class="exp-role">GRADUATE RESEARCH ASSISTANT</div>
+        <div class="exp-co">Illinois Institute of Technology · Chicago, IL</div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-bullets">
+          <li>Developed Python-based data pipelines to clean, integrate, and preprocess <strong>10,000+ records</strong> across multiple research datasets enabling reproducible workflows.</li>
+          <li>Engineered reusable feature extraction and validation processes with Pandas &amp; NumPy, reducing manual prep effort by <strong>30–40%</strong>.</li>
+          <li>Supported statistical and ML baseline models via Scikit-learn with structured feature preparation and analytical summaries.</li>
+          <li>Generated visualizations, reports, and documentation to ensure research reproducibility.</li>
+        </ul>
+        <div class="exp-chips">
+          <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Scikit-learn</span><span class="chip">Matplotlib</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-yr">2021–2023</div>
+      <div class="exp-meta">
+        <div class="exp-role">PROJECT ASSOCIATE</div>
+        <div class="exp-co">Cognizant · Hyderabad, India</div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-bullets">
+          <li>Developed and enhanced Java web applications using JSP, Servlets, and JDBC following MVC architecture with DAO, Singleton, and Factory patterns.</li>
+          <li>Tuned Oracle &amp; DB2 queries and stored procedures — key reports and batch jobs <strong>40% faster</strong>, batch window reduced by 1–2 hours.</li>
+          <li>Resolved WebSphere production issues (session faults, memory leaks, connection pool failures) cutting repeat incidents by <strong>20–30%</strong>.</li>
+          <li>Doubled batch job throughput without breaking SLAs; built and consumed REST APIs for internal system integration.</li>
+          <li>Collaborated with business analysts and QA to reproduce and ship stable functional defect fixes.</li>
+        </ul>
+        <div class="exp-chips">
+          <span class="chip">Java</span><span class="chip">JSP/Servlets</span><span class="chip">JDBC</span><span class="chip">Oracle</span><span class="chip">DB2</span><span class="chip">WebSphere</span><span class="chip">REST</span><span class="chip">Linux</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-yr">2020–2021</div>
+      <div class="exp-meta">
+        <div class="exp-role">PROGRAM ANALYST</div>
+        <div class="exp-co">Cognizant · Hyderabad, India</div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-bullets">
+          <li>Assisted in development of Java/J2EE applications using JSP, Servlets, and JDBC with DAO pattern for database connectivity.</li>
+          <li>Analyzed production logs, traced execution paths, and validated batch processes for data consistency.</li>
+          <li>Supported WebSphere deployments, environment validation, and documented system workflows and defect resolutions.</li>
+        </ul>
+        <div class="exp-chips">
+          <span class="chip">Java/J2EE</span><span class="chip">JSP</span><span class="chip">Oracle SQL</span><span class="chip">WebSphere</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec">
+  <p class="sec-label r">Projects</p>
+  <h2 class="sec-title r">WORK THAT<br/><em>Personal &amp; academic builds</em>SHIPS</h2>
+  <div class="proj-grid r">
+
+    <div class="proj-card">
+      <div class="proj-num">01</div>
+      <div class="proj-bar"></div>
+      <div class="proj-title">LEDGERFOX FINANCE API</div>
+      <div class="proj-desc">Containerized personal finance microservice built with Docker Compose. Tracks expenses, generates reports, and manages budgets. Automated schema migrations with Alembic. Full OpenAPI/Swagger docs for production-grade reliability.</div>
+      <div class="proj-stack">
+        <span class="ps">FastAPI</span><span class="ps">PostgreSQL</span><span class="ps">Redis</span><span class="ps">Docker</span><span class="ps">JWT</span><span class="ps">Alembic</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">02</div>
+      <div class="proj-bar"></div>
+      <div class="proj-title">CODE REVIEW PLATFORM</div>
+      <div class="proj-desc">Developer collaboration tool with GitHub-style pull request workflows, inline comments, and approval chains. JWT authentication with role-based permissions. Achieved 85%+ test coverage with Jest and Mocha integration tests.</div>
+      <div class="proj-stack">
+        <span class="ps">Node.js</span><span class="ps">React</span><span class="ps">MongoDB</span><span class="ps">Jest</span><span class="ps">Mocha</span><span class="ps">JWT</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-num">03</div>
+      <div class="proj-bar"></div>
+      <div class="proj-title">CLOUD-NATIVE DEPLOYMENT</div>
+      <div class="proj-desc">REST API containerized and deployed to Kubernetes with custom YAML manifests. Configured Deployments, Services, and Namespaces with CPU and memory resource limits. Full CI/CD pipeline via GitHub Actions for automated Docker builds and K8s deploys.</div>
+      <div class="proj-stack">
+        <span class="ps">Docker</span><span class="ps">Kubernetes</span><span class="ps">GitHub Actions</span><span class="ps">PostgreSQL</span><span class="ps">YAML</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="sec">
+  <p class="sec-label r">Education &amp; Certifications</p>
+  <h2 class="sec-title r">CREDENTIALS<br/><em>Academic foundation</em>&amp; CERTS</h2>
+  <div class="edu-grid r">
+
+    <div class="edu-card">
+      <span class="edu-icon">🎓</span>
+      <div class="edu-deg">MASTER OF SCIENCE</div>
+      <div class="edu-school">Illinois Institute of Technology</div>
+      <div class="edu-info">Information Technology &amp; Management · Chicago, IL<br/>GPA: 3.67 / 4.0<br/><br/>Coursework: Advanced AI Integration · Object Oriented Programming · Service Oriented Architecture (APIs) · Data Networks</div>
+    </div>
+
+    <div class="edu-card">
+      <span class="edu-icon">⚡</span>
+      <div class="edu-deg">BACHELOR OF ENGINEERING</div>
+      <div class="edu-school">Gandhi Institute of Technology &amp; Management</div>
+      <div class="edu-info">Electrical, Electronics &amp; Communications Engineering<br/>Hyderabad, India</div>
+      <span class="cert-label">Certifications</span>
+      <ul class="cert-list">
+        <li>Microsoft Power BI Desktop for Business Intelligence</li>
+        <li>AWS Certified Cloud Practitioner</li>
+        <li>Software Development Life Cycle (SDLC) — LinkedIn Learning</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ct-bg">SPT</div>
+  <p class="ct-label r">Get In Touch</p>
+  <h2 class="ct-title r">LET'S<br/><span>BUILD</span><br/>TOGETHER</h2>
+  <p class="ct-sub r">Open to enterprise Java roles, backend engineering positions, and research collaborations. Based in Chicago — open to relocate anywhere in the United States.</p>
+  <a href="mailto:saiprathyushatellakula@gmail.com" class="ct-email r">saiprathyushatellakula@gmail.com</a>
+  <div class="ct-links r">
+    <a href="https://www.linkedin.com/in/saiprathyusha-tellakula-29a9411a4" target="_blank" class="ct-link">LinkedIn ↗</a>
+    <span class="ct-link">Open to Relocate · Anywhere in the US</span>
+    <span class="ct-link">+1 (779) 364-4212</span>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Sai Prathyusha Tellakula</span>
+  <span>Java Developer · Enterprise Systems · Open to Relocate Anywhere in the US</span>
+</footer>
+
+<script>
+// CURSOR
+(function(){
+  const c=document.getElementById('cur'),r=document.getElementById('cur2');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
+  (function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.querySelectorAll('a,.proj-card,.stat,.skill-card,.exp-item,.edu-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{c.style.width='20px';c.style.height='20px';r.style.width='60px';r.style.height='60px'});
+    el.addEventListener('mouseleave',()=>{c.style.width='10px';c.style.height='10px';r.style.width='38px';r.style.height='38px'});
+  });
+})();
+
+// SCROLL REVEAL
+(function(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('v'),i*70);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.08});
+  document.querySelectorAll('.r').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
